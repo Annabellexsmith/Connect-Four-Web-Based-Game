@@ -1,3 +1,11 @@
 #modal {
     border: 5px solid deeppink;
 }
+
+.current-turn {
+    border: 5px solid palevioletred;
+}
+
+.results {
+    border: 5px solid plum;
+}
