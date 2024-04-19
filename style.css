@@ -28,12 +28,25 @@ body {
     border: 3px solid gold;
 }
 .slot {
+    display: flex;
     width: 20%;
     height: 5em;
     border: 2px solid black;
+    text-align: center;
+    align-items: center;  
+    justify-content: center; 
+
 }
 .row {
     display: flex;
+}
+.main-page {
+    font-size: 1.75em;    
+}
+#play-game{
+    padding: 10px 32px;
+    font-size: 1em;
+    font-weight: bold;
 }
 /* #play-game {
 
