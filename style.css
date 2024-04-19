@@ -1,11 +1,40 @@
 #modal {
     border: 5px solid deeppink;
 }
-
-.current-turn {
+.main-page {
     border: 5px solid palevioletred;
 }
 
 .results {
     border: 5px solid plum;
 }
+.board {
+    border: 5px solid white;
+}
+ /* will delete the above once finished  --------------------------------*/
+body {
+    background-color: lavenderblush;
+    margin: 0;
+    justify-content: center;
+    text-align: center;
+}
+
+.board {
+    margin:auto; /*this makes it centered */
+    display: flex;
+    flex-direction: column;
+    width: 500px;
+    justify-content: center;
+    border: 3px solid gold;
+}
+.slot {
+    width: 20%;
+    height: 5em;
+    border: 2px solid black;
+}
+.row {
+    display: flex;
+}
+/* #play-game {
+
+} */
