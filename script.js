@@ -13,7 +13,8 @@ let winner;
 
 // CONSTANTS --------------------------------------------------------
 const winningCombos = ''
-const dialog = document.querySelector("dialog")
+const openModal = document.getElementById('instruction-modal')
+const resultModal = document.getElementById('end-game-modal')
 const LOOKUP = {
     player1: 1,
     player2: -1
@@ -22,7 +23,10 @@ const LOOKUP = {
 // CATCHED ELEMENTS -------------------------------------------------
 const playButtonEl = document.getElementById('play-game')
 const boardInterFaceEl = document.querySelectorAll('.slot')
-const restartButtonEl = document.getElementById("restart")
+const restartButtonEl = document.getElementById('restart')
+
+
+
 // all catched correctly
 
 // EVENT LISTENERS --------------------------------------------------
@@ -31,14 +35,18 @@ restartButtonEl.addEventListener("click", restart)
 
 // FUNCTIONS ---------------------------------------------------------
 function init () {
-    dialog.showModal();
-    board = null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null;
+    openModal.showModal();
+    board = [null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null];
     player = 1;
     winner = false;
 }
+
 init ()
-function closeButton(){dialog.close()}
+
+function closeButton() {openModal.close()}
+
 function determWinner() {
+    
 }
 
 
@@ -47,8 +55,7 @@ function playerTurn() {
 }
 
 function message() { //can we merge this one with determWinner
+    resultModal.showModal()
 }
 
-function restart() {
-
-}
+function restart() {resultModal.close()}
