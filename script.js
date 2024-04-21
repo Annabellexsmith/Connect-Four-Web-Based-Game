@@ -13,6 +13,7 @@ let winner;
 
 // CONSTANTS --------------------------------------------------------
 const winningCombos = ''
+const dialog = document.querySelector("dialog")
 const LOOKUP = {
     player1: 1,
     player2: -1
@@ -20,23 +21,24 @@ const LOOKUP = {
 
 // CATCHED ELEMENTS -------------------------------------------------
 const playButtonEl = document.getElementById('play-game')
-const boardInterfaceEl = document.querySelectorAll('.slot')
+const boardInterFaceEl = document.querySelectorAll('.slot')
 const restartButtonEl = document.getElementById("restart")
 // all catched correctly
 
 // EVENT LISTENERS --------------------------------------------------
-
-
-
-
+playButtonEl.addEventListener("click", closeButton)
+restartButtonEl.addEventListener("click", restart)
 
 // FUNCTIONS ---------------------------------------------------------
 function init () {
+    dialog.showModal();
+    board = null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null;
+    player = 1;
+    winner = false;
 }
-
-
+init ()
+function closeButton(){dialog.close()}
 function determWinner() {
-
 }
 
 
@@ -45,7 +47,6 @@ function playerTurn() {
 }
 
 function message() { //can we merge this one with determWinner
-
 }
 
 function restart() {

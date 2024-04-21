@@ -1,13 +1,8 @@
-#modal {
-    border: 5px solid deeppink;
-}
+
 .main-page {
     border: 5px solid palevioletred;
 }
 
-.results {
-    border: 5px solid plum;
-}
 .board {
     border: 5px solid white;
 }
@@ -47,6 +42,22 @@ body {
     padding: 10px 32px;
     font-size: 1em;
     font-weight: bold;
+}
+#instruction-modal {
+    border: 5px solid deeppink;
+    justify-content: center;
+    align-items: center;
+    padding: 5em;
+}
+dialog::backdrop {
+    background-color: hsla(308, 100%, 97%, 0.962);
+}
+
+#end-game-modal {
+    border: 5px solid plum;
+    justify-content: center;
+    align-items: center;
+    padding: 5em;
 }
 /* #play-game {
 
