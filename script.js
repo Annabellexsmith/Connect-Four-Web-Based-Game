@@ -28,7 +28,7 @@ const LOOKUP = {
 // CATCHED ELEMENTS -------------------------------------------------
 const openModal = document.getElementById('instruction-modal')
 const playButtonEl = document.getElementById('play-game')
-let messageEl = document.getElementById('turn')
+const messageEl = document.getElementById('turn')
 const slotEls = document.querySelectorAll('.slot')
 const resultModal = document.getElementById('end-game-modal')
 const endMessageEl = document.getElementById('end-message')
@@ -38,14 +38,14 @@ const restartButtonEl = document.getElementById('restart')
 
 // EVENT LISTENERS --------------------------------------------------
 playButtonEl.addEventListener("click", closeButton)
-slotEls.forEach(function (slotEl){slotEl.addEventListener("click", dropToken)})
+//slotEls.forEach(function (slotEl){slotEl.addEventListener("click", dropToken)})
 restartButtonEl.addEventListener("click", restart)
 
 
 // FUNCTIONS ---------------------------------------------------------
 function init () {
     openModal.showModal();
-    board = [null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null];
+    board = [null, null, null, null, null], [null, null, null, null, null], [null, null, null, null, null], [null, null, null, null, null], [null, null, null, null, null];
     player = 1;
     winner = false;
     messageEl.innerText = `It is ${LOOKUP[player]}'s turn`;
@@ -53,32 +53,32 @@ function init () {
 init ()
 function closeButton() {openModal.close()}
 
-function dropToken() { // return to this!! 
-    const pickedSlot = parseInt(event.target.id); // use row instead
-    const row = board[pickedSlot]
-    for(i = 0; i < row.length; i++ ) {
+function dropToken(event) { // return to this!! 
+    const pickedColumnButton = parseInt(event.target.id); // use row instead
+    const column = board[pickedColumnButton]
+    for(let i = 0; i < column.length; i++ ) {
         if (row[i] !== null) return
-        else board[pickedSlot][i] = player}; // and there the spot under it is not empty
-    board[pickedSlot] = player;
-    console.log(board)
- 
+        else {
+            board[pickedColumnButton][i] = player
+            column[pickedColumnButton].children[i].innerText = token
+        }; 
+    }
 }
-
-function playerTurn(event) {
-    dropToken();
-    message();
-    turn *= -1;
+    function playerTurn() {
+        dropToken();
+        const winner = assessForWinner() 
+        
+      if (board !== null) message(winner); // if the board is full
+      else turn *= -1;
 }
-
 
 function assessForWinner() {
     resultModal.showModal() // should that be up here?
   
 }
 
-function message() { 
-    if (winner === "win") endMessageEl.innerText = `Congratulations! You have won! Play again?`
-    else if(winner === 'lost') endMessageEl.innerText = `Sorry, you didn't win! Practice makes progress. Play again?`
+function message(player) { 
+    if (player === "win") endMessageEl.innerText = `Congratulations! ${player} you have won! Play again?`
     else endMessageEl.innerText = `Gasp! It's a tie. Only way to figure out who wins is to play again!`
 }
 
@@ -87,4 +87,4 @@ function restart() {
     init ()
 }
 
-//board[pickedSlot][i]
+//board[pickedSlot][i
