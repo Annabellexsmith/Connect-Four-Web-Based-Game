@@ -19,24 +19,26 @@ const winningCombos =[[0, 1, 2, 3], [1, 2, 3, 4], [5, 6, 7, 8], [6, 7, 8, 9],
 [6, 12, 18, 24], [5, 11, 17, 23]]
 
 const LOOKUP = {
-    player1: 1,
-    player2: -1
+   "1": "Player One",
+   "-1": "Player Two"
 }
 
 // CATCHED ELEMENTS -------------------------------------------------
-const playButtonEl = document.getElementById('play-game')
-const restartButtonEl = document.getElementById('restart')
 const openModal = document.getElementById('instruction-modal')
-const resultModal = document.getElementById('end-game-modal')
-const messageEl = document.getElementById('turn')
+const playButtonEl = document.getElementById('play-game')
+let messageEl = document.getElementById('turn')
 const slotEls = document.querySelectorAll('.slot')
+const resultModal = document.getElementById('end-game-modal')
+const endMessage = document.getElementById('end-message')
+const restartButtonEl = document.getElementById('restart')
 
 // all catched correctly
 
 // EVENT LISTENERS --------------------------------------------------
 playButtonEl.addEventListener("click", closeButton)
+slotEls.forEach(function (slotEl){slotEl.addEventListener("click", playerTurn)})
 restartButtonEl.addEventListener("click", restart)
-slotEls.forEach (function (slotEl) {slotEl.addEventListener("click", updateBpard)})
+
 
 // FUNCTIONS ---------------------------------------------------------
 function init () {
@@ -44,24 +46,36 @@ function init () {
     board = [null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null];
     player = 1;
     winner = false;
+    messageEl.innerText = `It is ${LOOKUP[player]}'s turn`;
 }
 init ()
 function closeButton() {openModal.close()}
 
-function updateBoard(slotEl) {
-    const slot = (slotEl.currentTarget.id);
-    if (slot === null && slot[-5] !== null) {event.target.innerText = player};
+function dropToken() { // return to this!! 
+ 
 }
 
-function playerTurn() {
+function playerTurn(event) {
+    const pickedSlot = parseInt(event.target.id);
+    if (board[pickedSlot] !== null || winner) return // and there the spot under it is not empty
+    board[pickedSlot] = player;
+    turn *= -1;
+    dropToken();
+    //message();
 }
 
 
-function determWinner() {
-    
+function assessForWinner() {
+  
 }
+
 function message() { //can we merge this one with determWinner
+    if (winner === "win") endMessage.innerText = `Congratulations! You have won! Play again?`;
+
     resultModal.showModal()
 }
 
-function restart() {resultModal.close()}
+function restart() {
+    resultModal.close();
+    init ()
+}
