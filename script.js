@@ -17,6 +17,8 @@ const winningCombos =[[0, 1, 2, 3], [1, 2, 3, 4], [5, 6, 7, 8], [6, 7, 8, 9],
 [10, 11, 12, 13], [11, 12, 13, 14], [15, 16, 17, 18], [16, 17, 18, 19],
 [20, 21, 23, 23], [21, 22, 23, 24], [1, 7, 13, 19], [0, 6, 12 ,18], 
 [6, 12, 18, 24], [5, 11, 17, 23]]
+ 
+console.log(winningCombos[1][2]) // array 1, then element 3
 
 const LOOKUP = {
    "1": "Player One",
@@ -36,7 +38,7 @@ const restartButtonEl = document.getElementById('restart')
 
 // EVENT LISTENERS --------------------------------------------------
 playButtonEl.addEventListener("click", closeButton)
-slotEls.forEach(function (slotEl){slotEl.addEventListener("click", playerTurn)})
+slotEls.forEach(function (slotEl){slotEl.addEventListener("click", dropToken)})
 restartButtonEl.addEventListener("click", restart)
 
 
@@ -52,16 +54,20 @@ init ()
 function closeButton() {openModal.close()}
 
 function dropToken() { // return to this!! 
+    const pickedSlot = parseInt(event.target.id); // use row instead
+    const row = board[pickedSlot]
+    for(i = 0; i < row.length; i++ ) {
+        if (row[i] !== null) return
+        else board[pickedSlot][i] = player}; // and there the spot under it is not empty
+    board[pickedSlot] = player;
+    console.log(board)
  
 }
 
 function playerTurn(event) {
-    const pickedSlot = parseInt(event.target.id);
-    if (board[pickedSlot] !== null || winner) return // and there the spot under it is not empty
-    board[pickedSlot] = player;
-    turn *= -1;
     dropToken();
-    //message();
+    message();
+    turn *= -1;
 }
 
 
@@ -70,7 +76,7 @@ function assessForWinner() {
   
 }
 
-function message() { //can we merge this one with determWinner
+function message() { 
     if (winner === "win") endMessageEl.innerText = `Congratulations! You have won! Play again?`
     else if(winner === 'lost') endMessageEl.innerText = `Sorry, you didn't win! Practice makes progress. Play again?`
     else endMessageEl.innerText = `Gasp! It's a tie. Only way to figure out who wins is to play again!`
@@ -80,3 +86,5 @@ function restart() {
     resultModal.close();
     init ()
 }
+
+//board[pickedSlot][i]
