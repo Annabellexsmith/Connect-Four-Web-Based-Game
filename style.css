@@ -1,8 +1,4 @@
 
-.main-page {
-    border: 5px solid palevioletred;
-}
-
 .board {
     border: 5px solid white;
 }
@@ -17,16 +13,16 @@ body {
 .board {
     margin:auto; /*this makes it centered */
     display: flex;
-    flex-direction: column;
+    flex-direction: column-reverse;
     width: 500px;
     justify-content: center;
-    border: 3px solid gold;
+    border: 3px solid mediumblue;
 }
 .slot {
     display: flex;
     width: 20%;
     height: 5em;
-    border: 2px solid black;
+    border: 4px solid fuchsia;
     text-align: center;
     align-items: center;  
     justify-content: center; 

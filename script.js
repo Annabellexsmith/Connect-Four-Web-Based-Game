@@ -10,11 +10,14 @@
 let board;
 let player;
 let winner;
+let tie; 
 
 // CONSTANTS --------------------------------------------------------
-const winningCombos = ''
-const openModal = document.getElementById('instruction-modal')
-const resultModal = document.getElementById('end-game-modal')
+const winningCombos =[[0, 1, 2, 3], [1, 2, 3, 4], [5, 6, 7, 8], [6, 7, 8, 9],
+[10, 11, 12, 13], [11, 12, 13, 14], [15, 16, 17, 18], [16, 17, 18, 19],
+[20, 21, 23, 23], [21, 22, 23, 24], [1, 7, 13, 19], [0, 6, 12 ,18], 
+[6, 12, 18, 24], [5, 11, 17, 23]]
+
 const LOOKUP = {
     player1: 1,
     player2: -1
@@ -22,16 +25,18 @@ const LOOKUP = {
 
 // CATCHED ELEMENTS -------------------------------------------------
 const playButtonEl = document.getElementById('play-game')
-const boardInterFaceEl = document.querySelectorAll('.slot')
 const restartButtonEl = document.getElementById('restart')
-
-
+const openModal = document.getElementById('instruction-modal')
+const resultModal = document.getElementById('end-game-modal')
+const messageEl = document.getElementById('turn')
+const slotEls = document.querySelectorAll('.slot')
 
 // all catched correctly
 
 // EVENT LISTENERS --------------------------------------------------
 playButtonEl.addEventListener("click", closeButton)
 restartButtonEl.addEventListener("click", restart)
+slotEls.forEach (function (slotEl) {slotEl.addEventListener("click", updateBpard)})
 
 // FUNCTIONS ---------------------------------------------------------
 function init () {
@@ -40,20 +45,21 @@ function init () {
     player = 1;
     winner = false;
 }
-
 init ()
-
 function closeButton() {openModal.close()}
+
+function updateBoard(slotEl) {
+    const slot = (slotEl.currentTarget.id);
+    if (slot === null && slot[-5] !== null) {event.target.innerText = player};
+}
+
+function playerTurn() {
+}
+
 
 function determWinner() {
     
 }
-
-
-function playerTurn() {
-
-}
-
 function message() { //can we merge this one with determWinner
     resultModal.showModal()
 }
