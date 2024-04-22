@@ -29,7 +29,7 @@ const playButtonEl = document.getElementById('play-game')
 let messageEl = document.getElementById('turn')
 const slotEls = document.querySelectorAll('.slot')
 const resultModal = document.getElementById('end-game-modal')
-const endMessage = document.getElementById('end-message')
+const endMessageEl = document.getElementById('end-message')
 const restartButtonEl = document.getElementById('restart')
 
 // all catched correctly
@@ -66,13 +66,14 @@ function playerTurn(event) {
 
 
 function assessForWinner() {
+    resultModal.showModal() // should that be up here?
   
 }
 
 function message() { //can we merge this one with determWinner
-    if (winner === "win") endMessage.innerText = `Congratulations! You have won! Play again?`;
-
-    resultModal.showModal()
+    if (winner === "win") endMessageEl.innerText = `Congratulations! You have won! Play again?`
+    else if(winner === 'lost') endMessageEl.innerText = `Sorry, you didn't win! Practice makes progress. Play again?`
+    else endMessageEl.innerText = `Gasp! It's a tie. Only way to figure out who wins is to play again!`
 }
 
 function restart() {
