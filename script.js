@@ -22,6 +22,10 @@ const LOOKUP = {
    "1": "Player One",
    "-1": "Player Two"
 }
+const token = {
+    "1": "🐶",
+    "2":"🐱",
+}
 
 // CATCHED ELEMENTS -------------------------------------------------
 const openModal = document.getElementById('instruction-modal')
@@ -36,7 +40,7 @@ const restartButtonEl = document.getElementById('restart')
 
 // EVENT LISTENERS --------------------------------------------------
 playButtonEl.addEventListener("click", closeButton)
-slotEls.forEach(function (slotEl){slotEl.addEventListener("click", playerTurn)})
+slotEls.forEach(function (slotEl){slotEl.addEventListener("click", dropToken)})
 restartButtonEl.addEventListener("click", restart)
 
 
@@ -44,30 +48,28 @@ restartButtonEl.addEventListener("click", restart)
 function init () {
     openModal.showModal();
     board = [null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null];
-    player = 1;
+    player = "1";
     winner = false;
     messageEl.innerText = `It is ${LOOKUP[player]}'s turn`;
 }
 init ()
 function closeButton() {openModal.close()}
 
-function dropToken() { // return to this!! 
- 
+function dropToken(event) { // return to this!! 
+    console.log(parseInt(event.target.innerText))
+    let pickedSlot = parseInt(event.target.id);
+        for(let i = 0; i < board.length; i++) { 
+           // if (board[i] !== null || winner) return; // if there is a tie or winner return 
+            if(board[0] === null || board[1] === null ||board[2] === null || board[3] === null || board[4] === null) {
+            event.target.innerText= token[player]
+            } else if (board[i - 5] !== null && board[i] === null) {event.target.innerText = token[player]}
+        }
+    // assessForWinner()
+     turn *= -1;
 }
-
-function playerTurn(event) {
-    const pickedSlot = parseInt(event.target.id);
-    if (board[pickedSlot] !== null || winner) return // and there the spot under it is not empty
-    board[pickedSlot] = player;
-    turn *= -1;
-    dropToken();
-    //message();
-}
-
 
 function assessForWinner() {
     resultModal.showModal() // should that be up here?
-  
 }
 
 function message() { //can we merge this one with determWinner
@@ -79,4 +81,7 @@ function message() { //can we merge this one with determWinner
 function restart() {
     resultModal.close();
     init ()
-}
+    }
+    //const pickedSlot = parseInt(event.target.id);
+    // if (board[pickedSlot] !== null || winner) return // and there the spot under it is not empty
+    // board[pickedSlot] = player;
