@@ -24,7 +24,7 @@ const LOOKUP = {
 }
 const token = {
     "1": "🐶",
-    "2":"🐱",
+    "-1":"🐱",
 }
 
 // CATCHED ELEMENTS -------------------------------------------------
@@ -56,25 +56,45 @@ init ()
 function closeButton() {openModal.close()}
 
 function dropToken(event) { // return to this!! 
-    console.log(parseInt(event.target.innerText))
+  //  console.log(parseInt(event.target.innerText))
     let pickedSlot = parseInt(event.target.id);
-        for(let i = 0; i < board.length; i++) { 
+    console.log(pickedSlot, board[pickedSlot])
+        
            // if (board[i] !== null || winner) return; // if there is a tie or winner return 
-            if(board[0] === null || board[1] === null ||board[2] === null || board[3] === null || board[4] === null) {
-            event.target.innerText= token[player]
-            } else if (board[i - 5] !== null && board[i] === null) {event.target.innerText = token[player]}
-        }
+            if(pickedSlot <= 4 && board[pickedSlot] === null) {
+                event.target.innerHTML= token[player]
+                board[pickedSlot] = player
+            } else if (board[pickedSlot - 5] !== null) {
+               // console.log(board[i - 5], i)
+                event.target.innerHTML = token[player]
+                board[pickedSlot] = player
+            } else {
+                alert("invalid selection, please pick a spot with a token underneath it") 
+            }
+            
+        
+        //update board array to match the visual board
+console.log(board)
+    //(!== null && board[i] === null)
     // assessForWinner()
-     turn *= -1;
+     player *= -1;
 }
 
 function assessForWinner() {
-    resultModal.showModal() // should that be up here?
+    for(let i = 0; i < winningCombos.length; i++) {
+        const slotOne = board[winningCombos[i][0]];
+        const slotTwo = board[winningCombos[i][1]];
+        const slotThree = board[winningCombos[i][2]];
+        const slotFour  = board[winningCombos[i][3]];
+        const slotFive = board[winningCombos[i][4]]
+     if (slotOne === slotTwo && slotTwo === slotThree && slotThree === slotFour && slotFour === slotFive) {
+        return resultModal.showModal("win") // should that be up here?
+        } else if (board[i] !== null) return resultModal.showModal("tie")
+    }
 }
 
 function message() { //can we merge this one with determWinner
-    if (winner === "win") endMessageEl.innerText = `Congratulations! You have won! Play again?`
-    else if(winner === 'lost') endMessageEl.innerText = `Sorry, you didn't win! Practice makes progress. Play again?`
+    if (winner === "win") endMessageEl.innerText = `Congratulations ${player}! You have won! Play again?`
     else endMessageEl.innerText = `Gasp! It's a tie. Only way to figure out who wins is to play again!`
 }
 
