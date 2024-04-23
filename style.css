@@ -1,24 +1,26 @@
 
+.board {
+    border: 5px solid white;
+}
  /* will delete the above once finished  --------------------------------*/
 body {
     background-color: lavenderblush;
     margin: 0;
     justify-content: center;
     text-align: center;
-
 }
 
 .board {
     margin:auto; /*this makes it centered */
     display: flex;
-    flex-direction: row-reverse;
+    flex-direction: column-reverse;
     width: 500px;
     justify-content: center;
-
+    border: 3px solid mediumblue;
 }
 .slot {
     display: flex;
-    width: 80%; 
+    width: 20%;
     height: 5em;
     border: 4px solid fuchsia;
     text-align: center;
@@ -26,13 +28,8 @@ body {
     justify-content: center; 
 
 }
-.column {
+.row {
     display: flex;
-    flex-direction: column-reverse;
-    width: 100%;
-    /* position:relative; */
-  
-
 }
 .main-page {
     font-size: 1.75em;    
