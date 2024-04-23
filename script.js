@@ -19,62 +19,75 @@ const winningCombos =[[0, 1, 2, 3], [1, 2, 3, 4], [5, 6, 7, 8], [6, 7, 8, 9],
 [6, 12, 18, 24], [5, 11, 17, 23]]
  
 console.log(winningCombos[1][2]) // array 1, then element 3
-
 const LOOKUP = {
    "1": "Player One",
    "-1": "Player Two"
 }
+const token = {
+    "Player One": "🐱",
+    "Player Two":"🐶"
+}
 
 // CATCHED ELEMENTS -------------------------------------------------
-const openModal = document.getElementById('instruction-modal')
-const playButtonEl = document.getElementById('play-game')
-const messageEl = document.getElementById('turn')
-const slotEls = document.querySelectorAll('.slot')
-const resultModal = document.getElementById('end-game-modal')
-const endMessageEl = document.getElementById('end-message')
-const restartButtonEl = document.getElementById('restart')
-
+const openModal = document.getElementById('instruction-modal');
+const playButtonEl = document.getElementById('play-game');
+const messageEl = document.getElementById('turn');
+const columnOneButton = document.getElementById('column-0');
+const columnTwoButton = document.getElementById('column-1');
+const columnThreeButton = document.getElementById('column-2');
+const columnFourButton = document.getElementById('column-3');
+const columnFiveButton = document.getElementById('column-4');
+const resultModal = document.getElementById('end-game-modal');
+const endMessageEl = document.getElementById('end-message');
+const restartButtonEl = document.getElementById('restart');
 // all catched correctly
 
 // EVENT LISTENERS --------------------------------------------------
-playButtonEl.addEventListener("click", closeButton)
-//slotEls.forEach(function (slotEl){slotEl.addEventListener("click", dropToken)})
-restartButtonEl.addEventListener("click", restart)
-
+playButtonEl.addEventListener("click", () => {openModal.close()});
+restartButtonEl.addEventListener("click", restart);
+columnOneButton.addEventListener("click", dropToken);
+columnTwoButton.addEventListener("click", dropToken);
+columnThreeButton.addEventListener("click", dropToken);
+columnFourButton.addEventListener("click", dropToken);
+columnFiveButton.addEventListener("click", dropToken);
 
 // FUNCTIONS ---------------------------------------------------------
 function init () {
     openModal.showModal();
-    board = [null, null, null, null, null], [null, null, null, null, null], [null, null, null, null, null], [null, null, null, null, null], [null, null, null, null, null];
+    board = [
+        columnOne = [null, null, null, null, null], 
+        columnTwo = [null, null, null, null, null], 
+        columnThree = [null, null, null, null, null], 
+        columnFour = [null, null, null, null, null], 
+        columnFive = [null, null, null, null, null]];
     player = 1;
     winner = false;
     messageEl.innerText = `It is ${LOOKUP[player]}'s turn`;
 }
 init ()
-function closeButton() {openModal.close()}
+// function closeButton() {openModal.close()}
 
 function dropToken(event) { // return to this!! 
-    const pickedColumnButton = parseInt(event.target.id); // use row instead
-    const column = board[pickedColumnButton]
-    for(let i = 0; i < column.length; i++ ) {
-        if (row[i] !== null) return
+    const pickedColumnButton = parseInt(event.target); 
+    const columns = board[pickedColumnButton]
+    for(let i = 0; i < columns.length; i++ ) {
+        if (columns[i] !== null) return
         else {
-            board[pickedColumnButton][i] = player
-            column[pickedColumnButton].children[i].innerText = token
+            board[pickedColumnButton][i] = player //changing the board array
+            columns[pickedColumnButton].children[i].innerText = token //changing the physical board
         }; 
     }
 }
-    function playerTurn() {
-        dropToken();
-        const winner = assessForWinner() 
-        
-      if (board !== null) message(winner); // if the board is full
-      else turn *= -1;
+console.log(board)
+function playerTurn() {
+    dropToken();
+    const winner = assessForWinner() 
+        if (board !== null) message(winner); // if the board is full
+        else turn *= -1;
 }
 
 function assessForWinner() {
     resultModal.showModal() // should that be up here?
-  
 }
 
 function message(player) { 
@@ -87,4 +100,4 @@ function restart() {
     init ()
 }
 
-//board[pickedSlot][i
+//board[pickedSlot][i]
