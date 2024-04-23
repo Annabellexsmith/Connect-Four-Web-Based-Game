@@ -10,18 +10,16 @@
 let board;
 let player;
 let winner;
-let tie; 
-let messageEl = document.getElementById('turn')
 
 // CONSTANTS --------------------------------------------------------
-const winningCombos =[[0, 1, 2, 3], [1, 2, 3, 4], [5, 6, 7, 8], [6, 7, 8, 9],
+const winningCombos = [[0, 1, 2, 3], [1, 2, 3, 4], [5, 6, 7, 8], [6, 7, 8, 9],
 [10, 11, 12, 13], [11, 12, 13, 14], [15, 16, 17, 18], [16, 17, 18, 19],
 [20, 21, 23, 23], [21, 22, 23, 24], [1, 7, 13, 19], [0, 6, 12 ,18], 
-[6, 12, 18, 24], [5, 11, 17, 23]]
+[6, 12, 18, 24], [5, 11, 17, 23]];
 
 const LOOKUP = {
-   "1": "Player One",
-   "-1": "Player Two"
+    "1": "Player One",
+    "-1": "Player Two"
 }
 const token = {
     "1": "🐶",
@@ -29,13 +27,14 @@ const token = {
 }
 
 // CATCHED ELEMENTS -------------------------------------------------
-const openModal = document.getElementById('instruction-modal')
+const instructionEl = document.getElementById('instruction-modal')
 const playButtonEl = document.getElementById('play-game')
+const messageEl = document.getElementById('turn')
 const slotEls = document.querySelectorAll('.slot')
 const alertModal = document.getElementById('alertModal')
-const tryAgainButton = document.getElementById('tryAgainButton')
+const tryAgainButton = document.getElementById('try-again-button')
 const resultModal = document.getElementById('end-game-modal')
-const endMessageEl = document.getElementById('end-message')
+const resultMessageEl = document.getElementById('end-message')
 const restartButtonEl = document.getElementById('restart')
 
 // EVENT LISTENERS --------------------------------------------------
@@ -46,55 +45,57 @@ restartButtonEl.addEventListener("click", restart)
 
 // FUNCTIONS ---------------------------------------------------------
 function init () {
-    openModal.showModal();
+    instructionEl.showModal();
     board = [null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null];
     player = "1";
     winner = false;
     messageEl.innerText = `It is ${LOOKUP[player]}'s turn`;
 }
 init ()
-function closeButton() {openModal.close()}
+function closeButton() {instructionEl.close()}
 
-function dropToken(event) { // return to this!! 
+function dropToken(event) {
     let pickedSlot = parseInt(event.target.id);
-            if(pickedSlot <= 4 && board[pickedSlot] === null) {
-                event.target.innerHTML= token[player]
-                board[pickedSlot] = player
-            } else if (board[pickedSlot - 5] !== null) {
-                event.target.innerHTML = token[player]
-                board[pickedSlot] = player
+    console.log("board at pickedslot", board[pickedSlot])
+            if (board[pickedSlot] !== null) {
+                return;
+            } else if ((pickedSlot <= 4 && board[pickedSlot] === null) || board[pickedSlot - 5] !== null) {
+                event.target.innerHTML= token[player];
+                board[pickedSlot] = player;
             } else {
-                alertModal.show()
+                alertModal.show();
             }
-        
-    //  assessForWinner();
+     console.log("updated board", board)
+     assessForWinner();
      player *= -1;
+     messageEl.innerText = `It is ${LOOKUP[player]}'s turn`;
+}
+function closeAlertModal() {alertModal.close()}
+
+function assessForWinner(message) {
+    for(let i = 0; i < winningCombos.length; i++) {
+        const slotZero = board[winningCombos[i][0]];
+        const slotOne = board[winningCombos[i][1]];
+        const slotTwo = board[winningCombos[i][2]];
+        const slotThree  = board[winningCombos[i][3]];
+        const slotFour = board[winningCombos[i][4]]
+        if (slotZero === slotOne && slotOne === slotTwo && slotTwo === slotThree && slotThree === slotFour) {
+            winner = "win";
+            resultModal.openModal()
+            return message("win")
+        } else if (!board.includes(null)) {
+            resultModal.openModal()
+            return message()
+        } else {
+            continue;
+        }
+    }
 }
 
-function closeAlertModal () {alertModal.close()}
-
-// function assessForWinner(winner) {
-//     winner = false;
-//     for(let i = 0; i < winningCombos.length; i++) {
-//         const slotZero = board[winningCombos[i][0]];
-//         const slotOne = board[winningCombos[i][1]];
-//         const slotTwo = board[winningCombos[i][2]];
-//         const slotThree  = board[winningCombos[i][3]];
-//         const slotFour = board[winningCombos[i][4]]
-//         if (slotZero === "1" && slotOne === "1" && slotTwo === "1" && slotThree === "1" && slotFour === "1") {
-//            winner = "win";
-//             return resultModal.showModal() 
-//         } else {(board[i] !== null) 
-//             return resultModal.showModal("tie")
-//         }
-//     }
-// }
-
-function message() { //can we merge this one with determWinner
-    if (winner === "win") endMessageEl.innerText = `Congratulations ${player}! You have won! Play again?`
-    else endMessageEl.innerText = `Gasp! It's a tie. Only way to figure out who wins is to play again!`
+function message() {
+    if (winner === "win") resultMessageEl.textContent = `Congratulations ${LOOKUP[player]}! You have won! Play again?`
+    else resultMessageEl.textContent = `Gasp! It's a tie. Only way to figure out who wins is to play again!`
 }
-
 
 function restart() {
     resultModal.close();
