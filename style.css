@@ -12,6 +12,7 @@ body {
     width: 500px;
     justify-content: center;
     border: 10px solid #8D6734;
+    background-color: #8D6734;
 }
 .slot {
     width: 95px;
@@ -22,6 +23,8 @@ body {
     padding: 0px;
     margin: 0px;
     font-size: 70px;
+    border-radius: 80px;
+    background-color: #f3e5f2 ;
 }
 
 .column {
