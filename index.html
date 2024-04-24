@@ -8,22 +8,22 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <dialog class="modal"id="instruction-modal">
+    <dialog class="modal" id="instruction-modal">
         <div class="modal-content">
             <h1>Connect Four:</h1>
             <h2>
-            Instructions:
+            Let's play Connect Four with a twist! Winter in Seattle has been gloomy and Spring is just around the corner. Whoever wins will determine if Seattle gets an early spring or a extended winter. Player One, you will have sun tokens. Player Two, you will have cloud tokens. 
 
-            The objective of the game is to stack your tokens in a row of four before
-            your opponent. You will take turns stacking one token at a time while preventing
-            your opponent from getting four in a row. You must click where on the board you want your token to go. Remember, you token must either have another token it if it is not on the bottom row. Your winning streak can be horizontal, vertical,
-            or diagonal. The possibilities are endless! 
+            The objective of the game is to stack your tokens in a line of four before
+            your opponent. You will take turns stacking one token at a time. You must click where on the board you want your token to go. Remember, your token must either have another token below it if it's not on the bottom row. Your line can be horizontal, vertical,
+            or diagonal. 
 
             Press play to start the game. 
             </h2>
             <button id="play-game">PLAY</button>
          </div>
     </dialog>
+
 <section class="main-page"> 
      <header>
         <h1>Connect Four</h1>
@@ -66,19 +66,18 @@
         <div class="slot" id="22"></div>
         <div class="slot" id="23"></div>
         <div class="slot" id="24"></div>
-    </div>
-
-    <dialog class="modal" id="alertModal">
+    </div>       
+    <dialog class="modal" id="alert-modal">
         <h1>Oops! You need to select a slot with a token directly underneath of it.</h1>
         <button id="try-again-button">Try again!</button>
-     </dialog>
- </section>
+    </dialog> 
+</section>
 
- <dialog class="modal" id="end-game-modal">
-    <div class="results">
-            <h1 id="end-message">message</h1>
-            <button id="restart">Play again!</button>
-    </div>
 </dialog>
+<dialog class="modal" id="end-game-modal">
+   <div class="results">
+           <h1 id="end-message">message</h1>
+           <button id="restart">Play again!</button>
+   </div>
 </body>
 </html>
