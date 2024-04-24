@@ -1,7 +1,6 @@
 body {
-    background-color: #f3e5f2;
+    background-color: #b3f4a2;
     margin: 0;
-    justify-content: center;
     text-align: center;
 }
 
@@ -11,20 +10,20 @@ body {
     flex-direction: column-reverse;
     width: 500px;
     justify-content: center;
-    border: 10px solid #8D6734;
-    background-color: #8D6734;
+    border: 10px solid #A25F06;
+    background-color: #A25F06;
 }
 .slot {
     width: 95px;
     height: 95px;
-    border: 4px solid #8D6734;
+    border: 4px solid #A25F06;
     text-align: center;
     align-items: center;  
     padding: 0px;
     margin: 0px;
     font-size: 70px;
     border-radius: 80px;
-    background-color: #f3e5f2 ;
+    background-color: #b3f4a2;
 }
 
 .column {
@@ -33,27 +32,29 @@ body {
 .main-page {
     font-size: 1.75em;    
 }
-#play-game{
+.button {
     padding: 10px 32px;
     font-size: 1em;
-    font-weight: bold;
 }
-#instruction-modal {
+
+#instruction-modal, #alert-modal {
     justify-content: center;
     align-items: center;
     padding: 5em;
 }
+
 dialog::backdrop {
     background-color: #fff0fdf5;
 }
 
 .modal {
-    border: solid 3px black;
+    border: solid 6px rgb(0, 0, 0);
     padding: 10px 32px;
     font-size: 1em;
-    font-weight: bold;
 }
 
-#alert-modal::backdrop {
-    background-color: #fff0fdf5;
-}
+/* #alert-modal {
+    justify-content: center;
+    align-items: center;
+    padding: 5em;
+} */

@@ -1,2 +1,4 @@
 # Connect-Four-Web-Based-Game
-Projects completed from Software Engineering Bootcamp at General Assembly 
+Project completed from Software Engineering Bootcamp at General Assembly 
+
+[text](README.md)
