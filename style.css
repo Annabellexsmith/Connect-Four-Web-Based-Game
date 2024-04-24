@@ -1,5 +1,5 @@
 body {
-    background-color: lavenderblush;
+    background-color: #FEEFEF;
     margin: 0;
     justify-content: center;
     text-align: center;
@@ -11,16 +11,19 @@ body {
     flex-direction: column-reverse;
     width: 500px;
     justify-content: center;
-    border: 4px solid darkgoldenrod;
+    border: 10px solid #73532A;
 }
 .slot {
     display: flex;
     width: 20%;
     height: 5em;
-    border: 4px solid darkgoldenrod;
+    border: 4px solid #73532A;
     text-align: center;
     align-items: center;  
     justify-content: center; 
+    /* font-size: xx-large; */
+    padding: 0px;
+    margin: 0px;
 }
 .column {
     display: flex;
@@ -34,7 +37,6 @@ body {
     font-weight: bold;
 }
 #instruction-modal {
-    border: 5px solid deeppink;
     justify-content: center;
     align-items: center;
     padding: 5em;
@@ -43,25 +45,9 @@ dialog::backdrop {
     background-color: hsla(308, 100%, 97%, 0.962);
 }
 
-#alertModal {
-    justify-content: center;
-    align-items: center;
-    padding: 5em;
-}
-
-#try-again-button {
+.modal {
+    border: solid 3px black;
     padding: 10px 32px;
     font-size: 1em;
     font-weight: bold;
 }
-
-
-#end-game-modal {
-    border: 5px solid plum;
-    justify-content: center;
-    align-items: center;
-    padding: 5em;
-}
-/* #play-game {
-
-} */

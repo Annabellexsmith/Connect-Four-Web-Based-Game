@@ -35,10 +35,7 @@ const restartButtonEl = document.getElementById('restart')
 playButtonEl.addEventListener("click", function () {instructionEl.close()})
 slotEls.forEach(function (slotEl) {slotEl.addEventListener("click", dropToken)})
 tryAgainButton.addEventListener("click", function () {alertModal.close()})
-restartButtonEl.addEventListener("click", function() {
-    resultModal.close()
-    init()
-})
+restartButtonEl.addEventListener("click", function() {resultModal.close(); init()})
 
 // FUNCTIONS ---------------------------------------------------------
 function init () {
@@ -58,26 +55,49 @@ function render() { //(board updating function)
     })
 };
 
+// function dropToken(event) {
+//     let pickedSlot = parseInt(event.target.id);
+//     if (board[pickedSlot] !== null) {
+//         return;
+//     } else if (pickedSlot <= 4 && board[pickedSlot] === null || board[pickedSlot - 5] !== null) { 
+//         event.target.innerText = token[player];
+//         board[pickedSlot] = player;
+//         winner = assessForWinner()
+//         if (winner === "win" || winner === "tie") {
+//             message();
+//             resultModal.showModal();
+//             return;
+//         } else if (winner === null) {
+//             messageEl.innerText = `It is ${LOOKUP[player]}'s turn`;
+//         }
+//         player *= -1;
+//     } else {
+//         alertModal.show();
+//     }
+// }
+
 function dropToken(event) {
     let pickedSlot = parseInt(event.target.id);
     if (board[pickedSlot] !== null) {
-         return;
-    } else if ((pickedSlot <= 4 && board[pickedSlot] === null) || board[pickedSlot - 5] !== null) {
-        event.target.innerText= token[player];
+        return;
+    } else if (pickedSlot <= 4 && board[pickedSlot] === null || board[pickedSlot - 5] !== null) { 
+        event.target.innerText = token[player];
         board[pickedSlot] = player;
+        console.log("pre", winner)
         winner = assessForWinner()
+        console.log("post", winner)
         if (winner === "win" || winner === "tie") {
             message();
             resultModal.showModal();
             return;
         } else if (winner === null) {
-            player *= -1;
             messageEl.innerText = `It is ${LOOKUP[player]}'s turn`;
         }
     } else {
         alertModal.show();
     }
-} 
+    player *= -1;
+}
 
 function assessForWinner () {
     for(let i = 0; i < winningCombos.length; i++) {
@@ -87,15 +107,10 @@ function assessForWinner () {
     } 
     if (!board.includes(null)) {
         return "tie"
-    }  return null
+    }  
 }
 
 function message() {
-    if (winner === "win") resultMessageEl.textContent = `Congratulations ${LOOKUP[player *= -1]}! You have won! Play again?`
+    if (winner === "win") resultMessageEl.textContent = `Congratulations ${LOOKUP[player]}! You have won! Play again?`
     else resultMessageEl.textContent = `Gasp! It's a tie. Only way to figure out who wins is to play again!`
 }
-
-
-function restart() {
-    resultModal.close()
-    }
