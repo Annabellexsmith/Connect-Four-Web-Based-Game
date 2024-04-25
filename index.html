@@ -9,25 +9,23 @@
 </head>
 <body>
     <dialog class="modal" id="instruction-modal">
-        <div class="modal-content">
-            <h1>Connect Four:</h1>
+            <h1 class="title">Connect Four:</h1>
         
             <h2>
-            Let's play Connect Four with a twist! Winter in Seattle has been gloomy and Spring is just around the corner. Whoever wins will determine if Seattle gets an early spring or a extended winter. Player One, you will have sun tokens. Player Two, you will have cloud tokens. 
-            <br><br><br>
+            Let's play Connect Four with a twist! Winter in Seattle has been gloomy and spring is just around the corner. Whoever wins will determine if Seattle gets an early spring or a extended winter. Player One, you will have sun tokens and Player Two will have cloud tokens. 
+            <br><br>
             The objective of the game is to stack your tokens in a line of four before
             your opponent. You will take turns stacking one token at a time. You must click where on the board you want your token to go. Remember, your token must either have another token below it if it's not on the bottom row. Your line can be horizontal, vertical,
             or diagonal. 
-
+            <br><br>
             Press play to start the game. 
             </h2>
             <button class="button" id="play-game">PLAY</button>
-         </div>
     </dialog>
 
 <section class="main-page"> 
      <header>
-        <h1>Connect Four</h1>
+        <h1 class="title">Connect Four</h1>
         <h4 id="turn">It is your turn </h2>
      </header>  
  </section>
@@ -67,21 +65,18 @@
         <div class="slot" id="22"></div>
         <div class="slot" id="23"></div>
         <div class="slot" id="24"></div>
-    </div>       
-    <dialog class="modal" id="alert-modal">
-        <div class="alert-message">
-        <h1>Oops! You need to select a slot with a token directly underneath of it.</h1>
-        <button class="button" id="try-again-button">Try again!</button>
-        </div>
-    </dialog> 
+    </div>    
+
 </section>
+<dialog class="modal" id="alert-modal">
+    <h1>Oops! You need to select a slot with a token directly underneath of it.</h1>
+    <button class="button" id="try-again-button">Try again!</button>
+</dialog> 
 
 
 <dialog class="modal" id="end-game-modal">
-   <div class="results">
            <h1 id="end-message">message</h1>
            <button class="button" id="restart">Play again!</button>
-   </div>
 </dialog>
 </body>
 </html>

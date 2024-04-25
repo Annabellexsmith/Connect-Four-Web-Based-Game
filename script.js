@@ -71,12 +71,12 @@ function dropToken(event) {
             resultDisplayEl.showModal();
             return;
         } else if (winner === null) {
-            messageEl.innerText = `It is ${LOOKUP[player]}'s turn`;
         }
     } else {
-        alertDisplayEl.show();
+        alertDisplayEl.showModal();
         return;
-        }
+    }
+    messageEl.innerText = `It is ${LOOKUP[player]}'s turn`;
     player *= -1;
 }
 
@@ -92,6 +92,7 @@ function assessForWinner () {
 }
 
 function updateMessage() {
-    if (winner === "win") resultMessageEl.textContent = `Congratulations ${LOOKUP[player]}! You have won! Play again?`;
+    if (winner === "win") resultMessageEl.textContent = `Congratulations ${LOOKUP[player]}! 
+        You have won! Do you want to play again?`;
     else resultMessageEl.textContent = `Gasp! It's a tie. Only way to figure out who wins is to play again!`;
 }
